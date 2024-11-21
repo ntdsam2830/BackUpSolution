@@ -292,6 +292,24 @@ int brackets(string& S) {
 	return brackets.empty() ? 1 : 0;
 }
 
+int maxNonoverlappingSegments(vector<int>& A, vector<int>& B) {
+	// Implement your solution here
+	int N = A.size();
+	if (N == 0) return 0;
+
+	int count = 1; //at least 1 segment is choosen
+	int lastEnd = B[0]; //the ending point of the last choosen segment
+
+	for (int i = 0; i < N; i++) {
+		if (A[i] > lastEnd) {
+			count++;
+			lastEnd = B[i];
+		}
+	}
+
+	return count;
+}
+
 int main() {
 	vector<int> nums = { 1,5,4,2,9,9,9 };
 	string S = "aabaaaacaabc";
