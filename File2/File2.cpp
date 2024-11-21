@@ -310,6 +310,48 @@ int maxNonoverlappingSegments(vector<int>& A, vector<int>& B) {
 	return count;
 }
 
+int flags(vector<int>& A) {
+	int N = A.size();
+	if (N < 3) return 0; // No peaks possible for arrays of size < 3
+
+	// Step 1: Find all peaks
+	vector<int> peaks;
+	for (int i = 1; i < N - 1; i++) {
+		if (A[i - 1] < A[i] && A[i] > A[i + 1]) {
+			peaks.push_back(i);
+		}
+	}
+
+	int totalPeaks = peaks.size();
+	if (totalPeaks == 0) return 0; // No peaks available
+
+	// Step 2: Binary search for the maximum number of flags
+	int low = 0, high = totalPeaks, maxFlags = 0;
+	while (low <= high) {
+		int mid = (low + high) / 2;
+		int usedFlags = 1, lastFlag = peaks[0];
+
+		// Check if we can place `mid` flags
+		for (int i = 1; i < totalPeaks; i++) {
+			if (peaks[i] - lastFlag >= mid) {
+				usedFlags++;
+				lastFlag = peaks[i];
+				if (usedFlags == mid) break;
+			}
+		}
+
+		if (usedFlags >= mid) { // Can place `mid` flags
+			maxFlags = mid;
+			low = mid + 1;
+		}
+		else { // Cannot place `mid` flags
+			high = mid - 1;
+		}
+	}
+
+	return maxFlags;
+}
+
 int main() {
 	vector<int> nums = { 1,5,4,2,9,9,9 };
 	string S = "aabaaaacaabc";
