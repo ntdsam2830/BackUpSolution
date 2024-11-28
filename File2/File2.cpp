@@ -391,15 +391,28 @@ int firstUnique(vector <int>& A) {
 
 }
 
+int strSymmetryPoint(string& S) {
+	// Implement your solution here
+	int N = S.size();
+
+	if (N % 2 == 0) return -1;
+
+	for (int i = 0; i < N; i++) {
+		if (S[i] != S[N - 1 - i]) return -1;
+	}
+
+	return N /= 2;
+}
+
 int main() {
 	vector<int> nums = { 1,5,1,2,9,9,9 };
-	string S = "aabaaaacaabc";
+	string S = "aabaa";
 	string a = "([)()]";
 	string s = "anagram";
 	string t = "nagaram";
 	vector<string> strs = { "eat", "tea", "tan", "ate", "nat", "bat" };
 	vector<vector<int>> grid = { {2, 1, 1},{1, 2, 0},{0, 1, 1} };
-	cout << firstUnique(nums);
+	cout << strSymmetryPoint(S);
 	//groupAnagrams(strs);
 	//cout << isValid(a);
 	//vector<int> nums{ 2,4,6,7,11,15 };
