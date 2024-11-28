@@ -11,22 +11,22 @@
 using namespace std;
 
 char findTheDifference(string s, string t) {
-    int n = s.length();
-    int m = t.length();
-    sort(s.begin(), s.end());
-    sort(t.begin(), t.end());
-    for (int i = 0; i < n; i++) {
-        if (s[i] != t[i]) {
-            return t[i];
+	int n = s.length();
+	int m = t.length();
+	sort(s.begin(), s.end());
+	sort(t.begin(), t.end());
+	for (int i = 0; i < n; i++) {
+		if (s[i] != t[i]) {
+			return t[i];
 
-        }
-    }
-    return t.back();
+		}
+	}
+	return t.back();
 };
 
 vector<int> twoSum(vector<int>& nums, int target) {
 	unordered_map<int, int> numMap; //kh?i t?o hashmap
-	int n = nums.size(); 
+	int n = nums.size();
 
 	for (int i = 0; i < n; ++i) {
 		int temp = target - nums[i]; //tìm ph?n t? c?n tìm b?ng cách duy?t qua m?ng, l?y ph?n t? trong m?ng tr? ?i target
@@ -39,35 +39,35 @@ vector<int> twoSum(vector<int>& nums, int target) {
 }
 
 vector<int> twoSumII(vector<int>& arr, int target) {
-    vector<pair<int, int>>res;
-    for (int i = 0; i < arr.size(); i++)
-    {
-        int l = i, r = arr.size() - 1;
-        while (l < r)
-        {
-            int sum = arr[l] + arr[r];
-            if (sum == target)
-            {
-                res.push_back({ l,r });
-                break;
-            }
-            else if (sum < target)
-            {
-                l++;
-            }
-            else {
-                r--;
-            }
-        }
-        break;
-    }
-    vector<int>ans;
-    for (auto i : res)
-    {
-        ans.push_back(i.first + 1);
-        ans.push_back(i.second + 1);
-    }
-    return ans;
+	vector<pair<int, int>>res;
+	for (int i = 0; i < arr.size(); i++)
+	{
+		int l = i, r = arr.size() - 1;
+		while (l < r)
+		{
+			int sum = arr[l] + arr[r];
+			if (sum == target)
+			{
+				res.push_back({ l,r });
+				break;
+			}
+			else if (sum < target)
+			{
+				l++;
+			}
+			else {
+				r--;
+			}
+		}
+		break;
+	}
+	vector<int>ans;
+	for (auto i : res)
+	{
+		ans.push_back(i.first + 1);
+		ans.push_back(i.second + 1);
+	}
+	return ans;
 }
 
 int findTiles(int N, int M) {
@@ -376,15 +376,30 @@ string noThreeConsecutive(int A, int B) {
 	else return noThreeConsecutive(A - 1, B - 2) + "abb";
 }
 
+int firstUnique(vector <int>& A) {
+	unordered_map <int, int> frequency_map;
+
+	for (int num : A) {
+		frequency_map[num]++;
+	}
+
+	for (int num : A) {
+		if (frequency_map[num] == 1) return num;
+	}
+
+	return -1;
+
+}
+
 int main() {
-	vector<int> nums = { 1,5,4,2,9,9,9 };
+	vector<int> nums = { 1,5,1,2,9,9,9 };
 	string S = "aabaaaacaabc";
 	string a = "([)()]";
 	string s = "anagram";
 	string t = "nagaram";
 	vector<string> strs = { "eat", "tea", "tan", "ate", "nat", "bat" };
 	vector<vector<int>> grid = { {2, 1, 1},{1, 2, 0},{0, 1, 1} };
-	cout << noThreeConsecutive(1,4);
+	cout << firstUnique(nums);
 	//groupAnagrams(strs);
 	//cout << isValid(a);
 	//vector<int> nums{ 2,4,6,7,11,15 };
