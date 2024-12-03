@@ -418,6 +418,23 @@ int rotateTable(vector<int>& A, vector<int>& B) {
 	return -1;
 }
 
+string addSpaces(string s, vector<int>& spaces) {
+	const int m = spaces.size(), n = s.size();
+	string result(n + m, 0);
+	spaces.push_back(n);
+
+	int j = 0;
+	for (int i = 0; i < n; i++) {
+		if (j < m && i == spaces[j]) {
+			result[i + j] = ' ';
+			j++;
+		}
+		result[i + j] = s[i];
+	}
+
+	return result;
+}
+
 int main() {
 	vector<int> nums = { 1, 3, 5, 2, 8, 7 };
 	vector<int> nums2 = { 7, 1, 9, 8, 5, 7 };
@@ -425,9 +442,11 @@ int main() {
 	string a = "([)()]";
 	string s = "anagram";
 	string t = "nagaram";
+	string A = "LeetcodeHelpsMeLearn";
+	vector<int> spaces = { 8,13,15 };
 	vector<string> strs = { "eat", "tea", "tan", "ate", "nat", "bat" };
 	vector<vector<int>> grid = { {2, 1, 1},{1, 2, 0},{0, 1, 1} };
-	cout << rotateTable(nums, nums2);
+	cout << addSpaces(A, spaces);
 	//groupAnagrams(strs);
 	//cout << isValid(a);
 	//vector<int> nums{ 2,4,6,7,11,15 };
