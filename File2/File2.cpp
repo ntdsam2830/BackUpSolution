@@ -404,15 +404,30 @@ int strSymmetryPoint(string& S) {
 	return N /= 2;
 }
 
+int rotateTable(vector<int>& A, vector<int>& B) {
+	int N = A.size(), i,j;
+	for (i = 0; i < N; i++)
+	{
+		for (j = 0; j < N; j++)
+		{
+			int rotated_index = (i + j) % N;
+			if (B[j] == A[rotated_index])break;
+		}
+		if (j == N)return i;
+	}
+	return -1;
+}
+
 int main() {
-	vector<int> nums = { 1,5,1,2,9,9,9 };
+	vector<int> nums = { 1, 3, 5, 2, 8, 7 };
+	vector<int> nums2 = { 7, 1, 9, 8, 5, 7 };
 	string S = "aabaa";
 	string a = "([)()]";
 	string s = "anagram";
 	string t = "nagaram";
 	vector<string> strs = { "eat", "tea", "tan", "ate", "nat", "bat" };
 	vector<vector<int>> grid = { {2, 1, 1},{1, 2, 0},{0, 1, 1} };
-	cout << strSymmetryPoint(S);
+	cout << rotateTable(nums, nums2);
 	//groupAnagrams(strs);
 	//cout << isValid(a);
 	//vector<int> nums{ 2,4,6,7,11,15 };
