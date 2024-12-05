@@ -405,7 +405,7 @@ int strSymmetryPoint(string& S) {
 }
 
 int rotateTable(vector<int>& A, vector<int>& B) {
-	int N = A.size(), i,j;
+	int N = A.size(), i, j;
 	for (i = 0; i < N; i++)
 	{
 		for (j = 0; j < N; j++)
@@ -435,25 +435,47 @@ string addSpaces(string s, vector<int>& spaces) {
 	return result;
 }
 
+vector<int> codilityThanhNgan1(vector<string>& S) {
+	unordered_map<string, int> charMap;
+
+	for (int i = 0; i < S.size(); i++)
+	{
+		const string& str = S[i];
+
+		for (int j = 0; j < str.size(); j++) {
+			string key = string(1, str[j]) + " " + to_string(j);
+
+			if (charMap.find(key) != charMap.end() && charMap[key] != i) {
+				return { charMap[key], i, j };
+			}
+
+			charMap[key] = i;
+		}
+	}
+	return {};
+}
+
 int main() {
 	vector<int> nums = { 1, 3, 5, 2, 8, 7 };
 	vector<int> nums2 = { 7, 1, 9, 8, 5, 7 };
-	string S = "aabaa";
+	//string S = "aabaa";
 	string a = "([)()]";
-	string s = "anagram";
+	//string s = "anagram";
 	string t = "nagaram";
 	string A = "LeetcodeHelpsMeLearn";
+	vector<string> S = { "rg", "fc", "ab"};
 	vector<int> spaces = { 8,13,15 };
 	vector<string> strs = { "eat", "tea", "tan", "ate", "nat", "bat" };
 	vector<vector<int>> grid = { {2, 1, 1},{1, 2, 0},{0, 1, 1} };
-	cout << addSpaces(A, spaces);
+	//cout << solution(S);
 	//groupAnagrams(strs);
 	//cout << isValid(a);
 	//vector<int> nums{ 2,4,6,7,11,15 };
 	//int target = 9;
 	//auto v=twoSumII(nums, target);
-	/*for (int i = 0; i < strs.size(); i++)
-		cout << strs[i] << " ";
-	return 0;*/
+	vector<int> SS = codilityThanhNgan1(S);
+	for (int i = 0; i < SS.size(); i++)
+		cout << SS[i] << " ";
+
 
 }
