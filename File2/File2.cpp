@@ -7,6 +7,8 @@
 #include <unordered_map>
 #include <stack>
 #include <queue>
+#include <unordered_set>
+
 
 using namespace std;
 
@@ -455,6 +457,58 @@ vector<int> codilityThanhNgan1(vector<string>& S) {
 	return {};
 }
 
+int codilityThanhNgan2(vector<int>& A) {
+	unordered_map<int, int> keyMap;
+	for (int num : A) {
+		keyMap[num]++;
+	}
+
+	vector<int> keys;
+	for (auto& pair : keyMap) {
+		keys.push_back(pair.second);
+	}
+
+	sort(keys.rbegin(), keys.rend());
+
+	unordered_set<int> usedKey;
+	int flags = 0;
+
+	for (int key : keys) {
+		while (key > 0 && usedKey.count(key)) {
+			key--;
+			flags++;
+		}
+		if (key > 0) {
+			usedKey.insert(key);
+		}
+	}
+
+	return flags;
+}
+
+int codilityThanhNgan3(vector<int>& D, int X) {
+
+	if (D.empty()) return 0;
+	int days = 1;
+	int minDiff = D[0];
+	int maxDiff = D[0];
+
+	for (int i = 1; i < D.size(); i++)
+	{
+		minDiff = min(minDiff, D[i]);
+		maxDiff = max(maxDiff, D[i]);
+
+		if (maxDiff - minDiff > X) {
+			days++;
+
+			minDiff = D[i];
+			maxDiff = D[i];
+		}
+	}
+
+	return days;
+}
+
 int main() {
 	vector<int> nums = { 1, 3, 5, 2, 8, 7 };
 	vector<int> nums2 = { 7, 1, 9, 8, 5, 7 };
@@ -463,7 +517,7 @@ int main() {
 	//string s = "anagram";
 	string t = "nagaram";
 	string A = "LeetcodeHelpsMeLearn";
-	vector<string> S = { "rg", "fc", "ab"};
+	vector<string> S = { "rg", "fc", "ab" };
 	vector<int> spaces = { 8,13,15 };
 	vector<string> strs = { "eat", "tea", "tan", "ate", "nat", "bat" };
 	vector<vector<int>> grid = { {2, 1, 1},{1, 2, 0},{0, 1, 1} };
@@ -473,9 +527,13 @@ int main() {
 	//vector<int> nums{ 2,4,6,7,11,15 };
 	//int target = 9;
 	//auto v=twoSumII(nums, target);
-	vector<int> SS = codilityThanhNgan1(S);
+	/*vector<int> SS = codilityThanhNgan1(S);
 	for (int i = 0; i < SS.size(); i++)
-		cout << SS[i] << " ";
+		cout << SS[i] << " ";*/
+
+	/*vector<int> A1 = { }; 
+	int X1 = 0;
+	cout << solution(A1, X1) << endl;*/
 
 
 }
